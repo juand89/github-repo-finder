@@ -1,0 +1,12 @@
+* {
+	box-sizing: border-box;
+}
+body {
+    background-color:#c3cfe27e;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	min-height: 100vh;
+	font-family: 'Roboto', sans-serif;
+	margin: 40px 0 50px;
+}
