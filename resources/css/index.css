@@ -10,3 +10,11 @@ body {
 	font-family: 'Roboto', sans-serif;
 	margin: 40px 0 50px;
 }
+input {
+	font-family: 'Roboto', sans-serif;
+	border-radius: 5px;
+    font-size: larger;
+	border: 1px solid #ddd;
+	padding: 15px;
+	width: 480px;
+}
