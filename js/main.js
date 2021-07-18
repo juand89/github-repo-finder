@@ -1,5 +1,6 @@
 const inputSearch = document.getElementById('search')
 const sort = document.getElementById('sort')
+const totalResults = document.getElementById('total_results')
 var timeout = null
 var sortValue = ''
 const page = 1
@@ -13,7 +14,9 @@ inputSearch.addEventListener('input', (e) => {
         const repositories = await fetch(
           `${searchQuery}${inputSearch.value}&sort=${sortValue}&page=${page}`
         ).then((res) => res.json())
-        console.log(repositories)
+        totalResults.innerHTML = `<p>Total Results for  <i>"${
+          inputSearch.value
+        }"</i>:   <strong>${repositories.total_count.toLocaleString()}</strong></p>`
         timeout = null
       }, 1500)
     }
