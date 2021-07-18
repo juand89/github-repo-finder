@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>GitHub Repository Finder</title>
     <script src="js/main.js" async></script>
-    <link href="./resources/css/index.css" type="text/css" rel="stylesheet">
+    <link href="./resources/css/index.css" type="text/css" rel="stylesheet" />
   </head>
   <body>
-    <h2>
-        GitHub Repository Finder
-    </h2>
-    <input type="text" id="search" placeholder="Search for a Repository" />
+    <h2>GitHub Repository Finder</h2>
+    <div>
+      <input type="text" id="search" placeholder="Search for a Repository" />
+      <select name="sort" id="sort">
+        <option value="" disabled selected>Sort Repositories</option>
+        <option value="stars">Stars</option>
+        <option value="forks">Forks</option>
+        <option value="help-wanted-issues">Help Wanted Issues</option>
+      </select>
+    </div>
   </body>
 </html>

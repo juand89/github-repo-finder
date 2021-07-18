@@ -1,5 +1,9 @@
-const input_search = document.getElementById('search')
-input_search.addEventListener('input', (e) => {
-  const search_value = e.target.value
+const inputSearch = document.getElementById('search')
+const sort = document.getElementById('sort')
+var sortValue = ''
+inputSearch.addEventListener('input', (e) => {
+  const searchValue = e.target.value
 })
-
+sort.addEventListener('change', (e) => {
+  sortValue = e.target.value
+})
