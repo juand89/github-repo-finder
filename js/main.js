@@ -11,6 +11,8 @@ inputSearch.addEventListener('input', (e) => {
   try {
     if (searchValue && timeout === null) {
       // throttle api requests for 1500 ms
+      results.innerHTML = ''
+      totalResults.innerHTML = ''
       results.appendChild(showLoadingFrame())
       timeout = setTimeout(async () => {
         const repositories = await fetch(
@@ -19,6 +21,7 @@ inputSearch.addEventListener('input', (e) => {
         totalResults.innerHTML = `<p>Total Results for  <i>"${
           inputSearch.value
         }"</i>:   <strong>${repositories.total_count.toLocaleString()}</strong></p>`
+        showRepositories(repositories)
         timeout = null
       }, 1500)
     } else if (searchValue === '') {
@@ -33,7 +36,32 @@ sort.addEventListener('change', (e) => {
   sortValue = e.target.value
 })
 
-function showLoadingFrame () {
+function showRepositories(repositories) {
+  results.innerHTML = ''
+  const reposContainer = document.createElement('div')
+  reposContainer.classList.add('repositories')
+  repositories.items.forEach((repo) => {
+    const repoItem = document.createElement('div')
+    const repoInfo = document.createElement('div')
+    const repoDesc = document.createElement('p')
+    const repoName = document.createElement('a')
+    repoItem.classList.add('repo')
+    repoInfo.classList.add('repo_info')
+    repoDesc.classList.add('repo_description')
+    repoName.title = repo.full_name
+    repoDesc.innerText = repo.description
+    repoName.href = repo.html_url
+    repoName.target = '_blank'
+    repoName.text = repo.full_name
+    repoInfo.innerHTML = bookSvg
+    repoInfo.appendChild(repoName)
+    repoInfo.appendChild(repoDesc)
+    repoItem.appendChild(repoInfo)
+    reposContainer.appendChild(repoItem)
+  })
+  results.appendChild(reposContainer)
+}
+function showLoadingFrame() {
   const repoLoading = document.createElement('div')
   repoLoading.classList.add('repositories', 'loading')
   for (var i = 0; i < 8; i++) {
@@ -43,3 +71,7 @@ function showLoadingFrame () {
   }
   return repoLoading
 }
+
+const bookSvg = `<svg xmlns="http://www.w3.org/2000/svg" class="git_book" fill="DarkGray" viewBox="0 0 24 24" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 4v12l-4-2-4 2V4M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+</svg>`
