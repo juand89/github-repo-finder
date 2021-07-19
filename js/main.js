@@ -11,7 +11,7 @@ inputSearch.addEventListener('input', (e) => {
   try {
     if (searchValue && timeout === null) {
       // throttle api requests for 1500 ms
-      results.innerHTML = loadingFrame
+      results.appendChild(showLoadingFrame())
       timeout = setTimeout(async () => {
         const repositories = await fetch(
           `${searchQuery}${inputSearch.value}&sort=${sortValue}&page=${page}`
@@ -33,11 +33,13 @@ sort.addEventListener('change', (e) => {
   sortValue = e.target.value
 })
 
-const loadingFrame = `<div class="repositories loading">
-        <div class="repo-loading"></div>
-        <div class="repo-loading"></div>
-        <div class="repo-loading"></div>
-        <div class="repo-loading"></div>
-        <div class="repo-loading"></div>
-        <div class="repo-loading"></div>
-      </div>`
+function showLoadingFrame () {
+  const repoLoading = document.createElement('div')
+  repoLoading.classList.add('repositories', 'loading')
+  for (var i = 0; i < 8; i++) {
+    const repoItemLoading = document.createElement('div')
+    repoItemLoading.classList.add('repo-loading')
+    repoLoading.appendChild(repoItemLoading)
+  }
+  return repoLoading
+}
