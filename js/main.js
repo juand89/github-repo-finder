@@ -12,6 +12,7 @@ inputSearch.addEventListener('input', (e) => {
     if (searchValue && timeout === null) {
       // throttle api requests for 1500 ms
       totalResults.innerHTML = ''
+      results.appendChild(showLoadingFrame())
       timeout = setTimeout(async () => {
         await fetchRepositories()
         timeout = null
@@ -29,8 +30,6 @@ sort.addEventListener('change', (e) => {
   fetchRepositories()
 })
 async function fetchRepositories() {
-  results.innerHTML = ''
-  results.appendChild(showLoadingFrame())
   const repositories = await fetch(
     `${searchQuery}${inputSearch.value}&sort=${sortValue}&page=${page}`
   ).then((res) => res.json())
@@ -64,7 +63,8 @@ function showRepositories(repositories) {
   })
   results.appendChild(reposContainer)
 }
-function showLoadingFrame() {
+function showLoadingFrame () {
+  results.innerHTML = ''
   const repoLoading = document.createElement('div')
   repoLoading.classList.add('repositories', 'loading')
   for (var i = 0; i < 8; i++) {
