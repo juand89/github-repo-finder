@@ -64,6 +64,21 @@ body {
   background-size: 400%;
   animation: loading 1.2s ease-in-out infinite;
 }
+button {
+	font-size: larger;
+	padding: 10px;
+	border-radius: 5px;
+	background-color: #fff;
+}
+.page_number {
+	font-size: larger;
+	padding: 15px;
+	margin: 0.5rem;
+}
+#pagination {
+  margin-top: 1rem;
+  visibility: hidden;
+}
 @keyframes loading {
   0% {
     background-position: 100% 50%;
