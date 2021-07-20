@@ -11,17 +11,9 @@ inputSearch.addEventListener('input', (e) => {
   try {
     if (searchValue && timeout === null) {
       // throttle api requests for 1500 ms
-      results.innerHTML = ''
       totalResults.innerHTML = ''
-      results.appendChild(showLoadingFrame())
       timeout = setTimeout(async () => {
-        const repositories = await fetch(
-          `${searchQuery}${inputSearch.value}&sort=${sortValue}&page=${page}`
-        ).then((res) => res.json())
-        totalResults.innerHTML = `<p>Total Results for  <i>"${
-          inputSearch.value
-        }"</i>:   <strong>${repositories.total_count.toLocaleString()}</strong></p>`
-        showRepositories(repositories)
+        await fetchRepositories()
         timeout = null
       }, 1500)
     } else if (searchValue === '') {
@@ -34,8 +26,19 @@ inputSearch.addEventListener('input', (e) => {
 })
 sort.addEventListener('change', (e) => {
   sortValue = e.target.value
+  fetchRepositories()
 })
-
+async function fetchRepositories() {
+  results.innerHTML = ''
+  results.appendChild(showLoadingFrame())
+  const repositories = await fetch(
+    `${searchQuery}${inputSearch.value}&sort=${sortValue}&page=${page}`
+  ).then((res) => res.json())
+  totalResults.innerHTML = `<p>Total Results for  <i>"${
+    inputSearch.value
+  }"</i>:   <strong>${repositories.total_count.toLocaleString()}</strong></p>`
+  showRepositories(repositories)
+}
 function showRepositories(repositories) {
   results.innerHTML = ''
   const reposContainer = document.createElement('div')
