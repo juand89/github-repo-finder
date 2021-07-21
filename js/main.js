@@ -4,6 +4,7 @@ const totalResults = document.getElementById('total_results')
 const results = document.getElementById('search_results')
 const page = document.getElementById('page_number')
 var currentPage = 1
+var repositoriesTotalCount = 0
 const pagination = document.getElementById('pagination')
 var timeout = null
 var sortValue = ''
@@ -18,7 +19,7 @@ inputSearch.addEventListener('input', (e) => {
       results.appendChild(showLoadingFrame())
       // throttle api requests for 1500 ms
       timeout = setTimeout(async () => {
-        currentPage = 1
+        resetState()
         await fetchRepositories()
         timeout = null
       }, 1500)
@@ -44,6 +45,7 @@ async function fetchRepositories() {
       totalResults.innerHTML = `<p>Total Results for  <i>"${
         inputSearch.value
       }"</i>:   <strong>${repositories.total_count.toLocaleString()}</strong></p>`
+      repositoriesTotalCount = repositories.total_count
       if (repositories.total_count > 0) {
         showRepositories(repositories)
         if (repositories.total_count > 10) {
@@ -56,6 +58,12 @@ async function fetchRepositories() {
   } catch (e) {
     console.error(e)
   }
+}
+function resetState () {
+   currentPage = 1
+   page.innerText = currentPage
+   document.getElementById('previous').disabled = true
+   document.getElementById('next').disabled = false
 }
 function showRepositories(repositories) {
   results.innerHTML = ''
@@ -91,7 +99,9 @@ async function nextPage() {
   document.getElementById('previous').disabled = true
   document.getElementById('next').disabled = true
   await fetchRepositories()
-  document.getElementById('next').disabled = false
+  if (currentPage < (repositoriesTotalCount /10)) {
+    document.getElementById('next').disabled = false
+  }
   if (currentPage > 1) {
     document.getElementById('previous').disabled = false
   }

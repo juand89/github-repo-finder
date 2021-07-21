@@ -32,8 +32,8 @@ body {
 .repositories {
   padding: 0;
   width: 698px;
-  height: 60vh;
-  overflow-y: scroll;
+  max-height: 60vh;
+  overflow-y: auto;
 }
 .repo {
 	background-color: #fff;
