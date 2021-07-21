@@ -9,6 +9,18 @@ body {
   font-family: 'Roboto', sans-serif;
   margin: 40px 0 50px;
 }
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
 #search {
   font-family: 'Roboto', sans-serif;
   border-radius: 5px;
@@ -44,14 +56,23 @@ body {
 	align-items: center;
 	padding: 20px;
 	height: 9.5rem;
-	margin: 10px 0;
+	margin: 10px 4px;
+}
+.repo:hover {
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+.repo:first-child {
+  margin-top: 0;
 }
 .repo-loading {
 	border-radius: 3px;
 	box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
 	height: 9.5rem;
-	margin: 10px 0;
-	width: 680px;
+	margin: 10px 4px;
+	width: 684px;
+}
+.repo-loading:first-child {
+  margin-top: 0;
 }
 .git_book {
 	height: 16px;
