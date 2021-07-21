@@ -64,6 +64,19 @@ body {
   background-size: 400%;
   animation: loading 1.2s ease-in-out infinite;
 }
+.repo_description {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.repo_count_info {
+	display: flex;
+	flex-direction: row;
+}
+.repo_count_info > * {
+  margin: 6px;
+}
 button {
 	font-size: larger;
 	padding: 10px;
@@ -86,4 +99,11 @@ button {
   100% {
     background-position: 0 50%;
   }
+}
+svg {
+  height: 18px;
+  vertical-align: text-top;
+}
+.code_svg {
+  margin-right: 0.3rem;
 }
