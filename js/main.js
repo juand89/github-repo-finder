@@ -48,13 +48,13 @@ async function fetchRepositories() {
           inputSearch.value
         )}&sort=${sortValue}&order=${orderValue}&page=${currentPage}`
       ).then((res) => {
-        console.log(res)
         if (res.status >= 200 && res.status <= 299) {
           return res.json()
         } else if (res.status === 403) {
           totalResults.innerHTML =
             '<p class="error">The max limit of searches has been exceeded. Please wait a few minutes.</p>'
           results.innerHTML = ''
+          pagination.style.visibility = 'hidden'
           throw Error(res.status)
         } else {
           totalResults.innerHTML =
