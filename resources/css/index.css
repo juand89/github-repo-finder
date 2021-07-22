@@ -22,6 +22,7 @@ body {
   background: #555; 
 }
 #search {
+  
   font-family: 'Roboto', sans-serif;
   border-radius: 5px;
   font-size: larger;
@@ -33,6 +34,14 @@ body {
   border-radius: 5px;
   font-size: larger;
   border: 1px solid #ddd;
+ -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+  background-repeat: no-repeat;
+  background-position-x: 98%;
+  background-position-y: 50%;
+  padding-right: 1.6rem !important;
+  background-color: #fff;
   padding: 15px;
 }
 #total_results {

@@ -8,6 +8,7 @@ var repositoriesTotalCount = 0
 const pagination = document.getElementById('pagination')
 var timeout = null
 var sortValue = ''
+var orderValue = ''
 const searchQuery = `https://api.github.com/search/repositories?per_page=10&q=`
 inputSearch.addEventListener('input', (e) => {
   const searchValue = e.target.value
@@ -33,14 +34,21 @@ inputSearch.addEventListener('input', (e) => {
   }
 })
 sort.addEventListener('change', (e) => {
-  sortValue = e.target.value
+  const value = e.target.value
+  if (value !== '') {
+    sortValue = value.split('_')[0]
+    orderValue = value.split('_')[1]
+  } else {
+    sortValue = ''
+    orderValue = ''
+  }
   fetchRepositories()
 })
 async function fetchRepositories() {
   try {
     if (inputSearch.value) {
       const repositories = await fetch(
-        `${searchQuery}${encodeURIComponent(inputSearch.value)}&sort=${sortValue}&page=${currentPage}`
+        `${searchQuery}${encodeURIComponent(inputSearch.value)}&sort=${sortValue}&order=${orderValue}&page=${currentPage}`
       ).then((res) => res.json())
       totalResults.innerHTML = `<p>Total Results for  <i>"${
         inputSearch.value
