@@ -22,7 +22,6 @@ body {
   background: #555; 
 }
 #search {
-  
   font-family: 'Roboto', sans-serif;
   border-radius: 5px;
   font-size: larger;
@@ -117,6 +116,13 @@ button {
 	font-size: larger;
 	padding: 15px;
 	margin: 0.5rem;
+}
+.error {
+  color: #D8000C;
+  background-color: #FFBABA;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
 }
 #pagination {
   margin-top: 1rem;

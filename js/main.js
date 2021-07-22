@@ -12,25 +12,21 @@ var orderValue = ''
 const searchQuery = `https://api.github.com/search/repositories?per_page=10&q=`
 inputSearch.addEventListener('input', (e) => {
   const searchValue = e.target.value
-  try {
-    if (searchValue && timeout === null) {
-      pagination.style.visibility = 'hidden'
-      // show placeholder while typing
-      totalResults.innerHTML = ''
-      results.appendChild(showLoadingFrame())
-      // throttle api requests for 1500 ms
-      timeout = setTimeout(async () => {
-        resetState()
-        await fetchRepositories()
-        timeout = null
-      }, 1500)
-    } else if (searchValue === '') {
-      results.innerHTML = ''
-      totalResults.innerHTML = ''
-      pagination.style.visibility = 'hidden'
-    }
-  } catch (e) {
-    console.error(e)
+  if (searchValue && timeout === null) {
+    pagination.style.visibility = 'hidden'
+    // show placeholder while typing
+    totalResults.innerHTML = ''
+    results.appendChild(showLoadingFrame())
+    // throttle api requests for 1500 ms
+    timeout = setTimeout(async () => {
+      resetState()
+      await fetchRepositories()
+      timeout = null
+    }, 1500)
+  } else if (searchValue === '') {
+    results.innerHTML = ''
+    totalResults.innerHTML = ''
+    pagination.style.visibility = 'hidden'
   }
 })
 sort.addEventListener('change', (e) => {
@@ -48,8 +44,25 @@ async function fetchRepositories() {
   try {
     if (inputSearch.value) {
       const repositories = await fetch(
-        `${searchQuery}${encodeURIComponent(inputSearch.value)}&sort=${sortValue}&order=${orderValue}&page=${currentPage}`
-      ).then((res) => res.json())
+        `${searchQuery}${encodeURIComponent(
+          inputSearch.value
+        )}&sort=${sortValue}&order=${orderValue}&page=${currentPage}`
+      ).then((res) => {
+        console.log(res)
+        if (res.status >= 200 && res.status <= 299) {
+          return res.json()
+        } else if (res.status === 403) {
+          totalResults.innerHTML =
+            '<p class="error">The max limit of searches has been exceeded. Please wait a few minutes.</p>'
+          results.innerHTML = ''
+          throw Error(res.status)
+        } else {
+          totalResults.innerHTML =
+            '<p class="error">An unexpected error ocurred.</p>'
+          results.innerHTML = ''
+          throw Error(res.status)
+        }
+      })
       totalResults.innerHTML = `<p>Total Results for  <i>"${
         inputSearch.value
       }"</i>:   <strong>${repositories.total_count.toLocaleString()}</strong></p>`
@@ -64,14 +77,14 @@ async function fetchRepositories() {
       }
     }
   } catch (e) {
-    console.error(e)
+    console.error(e.message)
   }
 }
-function resetState () {
-   currentPage = 1
-   page.innerText = currentPage
-   document.getElementById('previous').disabled = true
-   document.getElementById('next').disabled = false
+function resetState() {
+  currentPage = 1
+  page.innerText = currentPage
+  document.getElementById('previous').disabled = true
+  document.getElementById('next').disabled = false
 }
 function showRepositories(repositories) {
   results.innerHTML = ''
@@ -128,7 +141,7 @@ async function nextPage() {
   document.getElementById('previous').disabled = true
   document.getElementById('next').disabled = true
   await fetchRepositories()
-  if (currentPage < (repositoriesTotalCount /10)) {
+  if (currentPage < repositoriesTotalCount / 10) {
     document.getElementById('next').disabled = false
   }
   if (currentPage > 1) {
@@ -161,7 +174,6 @@ function showLoadingFrame() {
   }
   return repoLoading
 }
-
 
 const bookSvg = `<svg xmlns="http://www.w3.org/2000/svg" class="git_book" fill="DarkGray" viewBox="0 0 24 24" stroke="currentColor">
   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 4v12l-4-2-4 2V4M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
