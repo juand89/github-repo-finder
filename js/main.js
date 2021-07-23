@@ -171,7 +171,7 @@ function showLoadingFrame() {
   repoLoading.classList.add('repositories', 'loading');
   for (var i = 0; i < 8; i++) {
     const repoItemLoading = document.createElement('div');
-    repoItemLoading.classList.add('repo-loading');
+    repoItemLoading.classList.add('repo_loading');
     repoLoading.appendChild(repoItemLoading);
   }
   return repoLoading;

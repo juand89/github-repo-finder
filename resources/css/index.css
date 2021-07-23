@@ -9,17 +9,23 @@ body {
   font-family: 'Roboto', sans-serif;
   margin: 40px 0 50px;
 }
+button {
+  font-size: larger;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #fff;
+}
 ::-webkit-scrollbar {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #f1f1f1; 
+  background: #f1f1f1;
 }
 ::-webkit-scrollbar-thumb {
-  background: #888; 
+  background: #888;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #555; 
+  background: #555;
 }
 #search {
   font-family: 'Roboto', sans-serif;
@@ -33,7 +39,7 @@ body {
   border-radius: 5px;
   font-size: larger;
   border: 1px solid #ddd;
- -webkit-appearance: none;
+  -webkit-appearance: none;
   -moz-appearance: none;
   background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
   background-repeat: no-repeat;
@@ -56,36 +62,36 @@ body {
   overflow-y: auto;
 }
 .repo {
-	background-color: #fff;
-	border-radius: 3px;
-	box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding: 20px;
-	height: 9.5rem;
-	margin: 10px 4px;
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  height: 9.5rem;
+  margin: 10px 4px;
 }
 .repo:hover {
-	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 .repo:first-child {
   margin-top: 0;
 }
-.repo-loading {
-	border-radius: 3px;
-	box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
-	height: 9.5rem;
-	margin: 10px 4px;
-	width: 684px;
+.repo_loading {
+  border-radius: 3px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+  height: 9.5rem;
+  margin: 10px 4px;
+  width: 684px;
 }
-.repo-loading:first-child {
+.repo_loading:first-child {
   margin-top: 0;
 }
 .git_book {
-	height: 16px;
-	vertical-align: bottom;
-	margin-right: 6px;
+  height: 16px;
+  vertical-align: bottom;
+  margin-right: 6px;
 }
 .loading div {
   color: transparent;
@@ -100,26 +106,20 @@ body {
   overflow: hidden;
 }
 .repo_count_info {
-	display: flex;
-	flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 .repo_count_info > * {
   margin: 6px;
 }
-button {
-	font-size: larger;
-	padding: 10px;
-	border-radius: 5px;
-	background-color: #fff;
-}
 .page_number {
-	font-size: larger;
-	padding: 15px;
-	margin: 0.5rem;
+  font-size: larger;
+  padding: 15px;
+  margin: 0.5rem;
 }
 .error {
-  color: #D8000C;
-  background-color: #FFBABA;
+  color: #d8000c;
+  background-color: #ffbaba;
   padding: 10px;
   border-radius: 5px;
   text-align: center;
